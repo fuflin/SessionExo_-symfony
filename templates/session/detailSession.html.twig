@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détail d'une session{% endblock %}
+
+{% block body %}
+    <h1>{{ session }}</h1>
+
+    <p>
+        Nom de la Session : {{session.name }}<br>
+        Date de début : {{session.date_begin | date('d/m/Y')}}<br>
+        Date de fin : {{session.date_end | date('d/m/Y')}}<br>
+        Nombre de places : {{ session.Nb_place}}<br>
+    </p>
+
+    {# <h2>Liste des employés</h2>
+
+    {% if entreprise.employes | length == 0 %}
+
+        <p>Pas d'employés dans cette entreprise</p>
+
+    {% else %}
+
+        {% for employe in entreprise.employes %}
+        <a href="{{ path('show_employe', {'id':employe.id})}}">{{ employe }}</a><br>
+        {% endfor %}
+
+    {% endif %}
+     #}
+{% endblock %}
