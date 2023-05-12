@@ -3,11 +3,14 @@
 namespace App\Form;
 
 use App\Entity\Session;
+use App\Entity\Stagiaire;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 
 class SessionType extends AbstractType
@@ -23,8 +26,12 @@ class SessionType extends AbstractType
             ->add('Nb_place', IntegerType::class)
             ->add('stagiaires', EntityType::class, [
                 'class' => Stagiaire::class,
-                'choice_label' => 'name',
+                'choice_label' => 'firstname',
+                'multiple' => true,
+                'expanded' => true
             ])
+            ->add('submit', SubmitType::class, [
+                'attr' => ['class' => 'btn btn-secondary']])
         ;
     }
 
