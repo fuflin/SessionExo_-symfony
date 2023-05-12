@@ -6,6 +6,7 @@ use App\Entity\Session;
 use App\Entity\Stagiaire;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -18,15 +19,18 @@ class FormStagiaireType extends AbstractType
         $builder
             ->add('firstname', TextType::class)
             ->add('lastname', TextType::class)
-            ->add('birth_date', DateType::class)
+            ->add('birth_date', DateType::class, [ // ici on aura un type date sans les heures
+                'widget' => 'single_text'])
             ->add('gender', TextType::class)
             ->add('city', TextType::class)
             ->add('cp', TextType::class)
             ->add('mail', TextType::class)
             ->add('phone_number', TextType::class)
-            ->add('sessions', EntityClass::class, [
+            ->add('sessions', EntityType::class, [
                 'class' => Session::class,
-                'choice_label' => 'name',])
+                'choice_label' => 'name',
+                'multiple' => true,
+                'expanded' => true])
             ->add('submit', SubmitType::class, [
                 'attr' => ['class' => 'btn btn-secondary']])
         ;
