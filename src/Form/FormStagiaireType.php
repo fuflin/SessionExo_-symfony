@@ -9,6 +9,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class FormStagiaireType extends AbstractType
 {
@@ -25,8 +26,9 @@ class FormStagiaireType extends AbstractType
             ->add('phone_number', TextType::class)
             ->add('sessions', EntityClass::class, [
                 'class' => Session::class,
-                'choice_label' => 'name',
-            ])
+                'choice_label' => 'name',])
+            ->add('submit', SubmitType::class, [
+                'attr' => ['class' => 'btn btn-secondary']])
         ;
     }
 
