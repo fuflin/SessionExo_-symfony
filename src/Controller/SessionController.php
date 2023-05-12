@@ -11,7 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class SessionController extends AbstractController
 {
     #[Route('/session', name: 'app_session')]
-    
+
     public function index(EntityManagerInterface $em): Response
     {
         $sessions = $em->getRepository(Session::class)->findAll();
@@ -20,7 +20,7 @@ class SessionController extends AbstractController
         ]);
     }
 
-    
+
     #[Route('/session/{id}', name: 'show_session')]
 
     public function show(Session $session): Response
@@ -30,5 +30,4 @@ class SessionController extends AbstractController
         ]);
     }
 
-    
 }
