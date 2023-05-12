@@ -6,6 +6,8 @@
 
     <h1>Listes des sessions</h1>
 
+    <a href="{{ path('add_session')}}">Ajouter une session</a><br><br><br>
+
     {% for session in sessions %}
 
         <a href="{{ path('show_session', {'id': session.id})}}">{{session}}</a><br>
