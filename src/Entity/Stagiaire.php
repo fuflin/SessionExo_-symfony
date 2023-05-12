@@ -143,6 +143,13 @@ class Stagiaire
         return $this;
     }
 
+    public function getAge(){
+
+        $now = new \DateTime();
+        $interval = date_diff($this->birth_date, $now);
+        return $interval->format('%Y');
+    }
+
     /**
      * @return Collection<int, Session>
      */
