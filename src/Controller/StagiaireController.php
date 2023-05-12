@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Stagiaire;
+use App\Form\FormStagiaireType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,26 +24,28 @@ class StagiaireController extends AbstractController
     }
 
     // fonction pour ajouter un stagiaire
-    #[Route('/stagiaire', name: 'add_stagiaire')]
+    #[Route('/stagiaire/add', name: 'add_stagiaire')]
 
     public function add(EntityManagerInterface $em, Request $request): Response
     {
 
-            $stagiaire = new stagiaire();
+            $stagiaire = new Stagiaire();
 
-        $form = $this->createForm(StagiaireType::class, $stagiaire);
+        $form = $this->createForm(FormStagiaireType::class, $stagiaire);
         $form->handleRequest($request);
 
         // si (on a bien appuyer sur submit && que les infos du formalaire sont conformes au filter input qu'on aura mis)
         if ($form->isSubmitted() && $form->isValid()) {
 
+            
             $stagiaire = $form->getData(); // hydratation avec données du formulaire / injection des valeurs saisies dans le form
+            
             $em->persist($stagiaire); // équivalent du prepare dans PDO
             $em->flush(); // équivalent de insert into (execute) dans PDO
-
+            
+            dd($stagiaire);        
             return $this->redirectToRoute('app_stagiaire');
         }
-
         // vue pour afficher le formulaire d'ajout
         return $this->render('stagiaire/add.html.twig', [
             'formAddStagiaire' => $form->createView(), ]); // création du formulaire
