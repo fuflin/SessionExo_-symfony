@@ -4,8 +4,23 @@
 
 {% block body %} {# parti contenant ce qu'on veux affiché #}
 
+<h1>Ajouter un stagiaire</h1>
 
-    {{ form(formAddStagiaire) }}
+    {{form_start(formAddStagiaire)}}
 
+        {{form_row(formAddStagiaire.firstname)}}
+        {{form_row(formAddStagiaire.lastname)}}
+        {{form_row(formAddStagiaire.birth_date)}}
+        {{form_row(formAddStagiaire.gender)}}
+        {{form_row(formAddStagiaire.city)}}
+        {{form_row(formAddStagiaire.cp)}}
+        {{form_row(formAddStagiaire.mail)}}
+        {{form_row(formAddStagiaire.phone_number)}}
+        {{form_row(formAddStagiaire.sessions)}}
 
+        {{form_row(formAddStagiaire.submit, {'label':'Ajouter' })}}
+
+    {{form_end(formAddStagiaire)}}
+
+{# {{ dump(formAddStagiaire.sessions) }} #}
 {% endblock %}
