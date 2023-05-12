@@ -10,6 +10,8 @@
 
 <h1>Listes des stagiaires</h1>
 
+    <a href="{{ path('add_stagiaire')}}">Ajouter un stagiaire</a><br><br><br>
+
     {% for stagiaire in stagiaires %}
 
         <a href="{{ path('show_stagiaire', {'id': stagiaire.id})}}">{{stagiaire}}</a><br>
