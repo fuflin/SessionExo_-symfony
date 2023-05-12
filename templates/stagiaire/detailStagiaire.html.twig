@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello StagiaireController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<h1>Détail du stagiaire</h1>
+
+    <h2>Stagiare {{ stagiaire }}</h2>
+
+    <p>
+        Sexe : {{stagiaire.gender }}<br>
+        Date de naissance : {{stagiaire.BirthDate | date('d/m/Y')}}<br>
+        Ville : {{stagiaire.City}}<br>
+        Code postal : {{stagiaire.Cp}}<br>
+        Courriel : {{stagiaire.Mail}}<br>
+        Téléphone : {{ stagiaire.PhoneNumber}}<br>
+    </p>
+
+    {# <h2>Liste des employés</h2>
+
+    {% if entreprise.employes | length == 0 %}
+
+        <p>Pas d'employés dans cette entreprise</p>
+
+    {% else %}
+
+        {% for employe in entreprise.employes %}
+        <a href="{{ path('show_employe', {'id':employe.id})}}">{{ employe }}</a><br>
+        {% endfor %}
+
+    {% endif %}
+     #}
+
+{% endblock %}
