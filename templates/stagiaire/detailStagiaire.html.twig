@@ -14,26 +14,26 @@
 
     <p>
         Sexe : {{stagiaire.gender }}<br>
-        Date de naissance : {{stagiaire.BirthDate | date('d/m/Y')}}<br>
+        Date de naissance : {{stagiaire.BirthDate | date('d/m/Y')}} ({{stagiaire.age}} ans)<br>
         Ville : {{stagiaire.City}}<br>
         Code postal : {{stagiaire.Cp}}<br>
         Courriel : {{stagiaire.Mail}}<br>
         Téléphone : {{ stagiaire.PhoneNumber}}<br>
     </p>
 
-    {# <h2>Liste des employés</h2>
+    <h2>Liste des sessions</h2>
 
-    {% if entreprise.employes | length == 0 %}
+    {# {% if stagiaire.sessions | length == 0 %}
 
-        <p>Pas d'employés dans cette entreprise</p>
+        <p>Pas inscrit dans une session</p> #}
 
-    {% else %}
+    {# {% else %} #}
 
-        {% for employe in entreprise.employes %}
-        <a href="{{ path('show_employe', {'id':employe.id})}}">{{ employe }}</a><br>
+        {% for session in stagiaire.sessions %}
+        <a href="{{ path('show_session', {'id':session.id})}}">{{ session }}</a><br>
         {% endfor %}
 
-    {% endif %}
-     #}
+    {# {% endif %} #}
+    
 
 {% endblock %}
