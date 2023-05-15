@@ -4,11 +4,15 @@
 
 {% block body %} {# parti contenant ce qu'on veux affiché #}
 
-<h1>Ajouter un stagiaire</h1>
+{% if edit %} {# on vérifie l'état de edit qui est un booléen #}
+        <h1>Editer un employé</h1>
+    {% else %}
+        <h1>Ajouter un employé</h1>
+    {% endif %}
 
     {{form_start(formAddStagiaire)}}
 
-        {{form_row(formAddStagiaire.firstname)}}
+        {{form_row(formAddStagiaire.name)}}
         {{form_row(formAddStagiaire.lastname)}}
         {{form_row(formAddStagiaire.birth_date)}}
         {{form_row(formAddStagiaire.gender)}}
@@ -18,7 +22,7 @@
         {{form_row(formAddStagiaire.phone_number)}}
         {{form_row(formAddStagiaire.sessions)}}
 
-        {{form_row(formAddStagiaire.submit, {'label':'Ajouter' })}}
+        {{form_row(formAddStagiaire.submit, {'label':'Soumettre'})}}
 
     {{form_end(formAddStagiaire)}}
 
