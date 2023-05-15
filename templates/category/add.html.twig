@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter/Editer une catégorie{% endblock %}
+
+{% block body %} {# parti contenant ce qu'on veux affiché #}
+
+{% if edit %} {# on vérifie l'état de edit qui est un booléen #}
+        <h1>Editer une catégorie</h1>
+    {% else %}
+        <h1>Ajouter une catégorie</h1>
+    {% endif %}
+
+    {{form_start(formAddCategory)}}
+
+        {{form_row(formAddCategory.name)}}
+
+        {{form_row(formAddCategory.submit, {'label':'Soumettre'})}}
+
+    {{form_end(formAddCategory)}}
+
+{% endblock %}
