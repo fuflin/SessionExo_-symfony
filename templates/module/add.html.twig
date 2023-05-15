@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter/Editer un module{% endblock %}
+
+{% block body %} {# parti contenant ce qu'on veux affiché #}
+
+{% if edit %} {# on vérifie l'état de edit qui est un booléen #}
+        <h1>Editer un module</h1>
+    {% else %}
+        <h1>Ajouter un module</h1>
+    {% endif %}
+
+    {{form_start(formAddModule)}}
+
+        {{form_row(formAddModule.name)}}
+
+        {{form_row(formAddModule.submit, {'label':'Soumettre'})}}
+
+    {{form_end(formAddModule)}}
+
+{% endblock %}
