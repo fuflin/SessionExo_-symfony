@@ -25,11 +25,15 @@ class StagiaireController extends AbstractController
 
     // fonction pour ajouter un stagiaire
     #[Route('/stagiaire/add', name: 'add_stagiaire')]
+    #[Route('/stagiaire/{id}/edit', name: 'edit_stagiaire')]
 
-    public function add(EntityManagerInterface $em, Request $request): Response
+    public function add(EntityManagerInterface $em, Stagiaire $stagiaire = null, Request $request): Response
     {
 
+        if(!$stagiaire){
+
             $stagiaire = new Stagiaire();
+        }
 
         $form = $this->createForm(FormStagiaireType::class, $stagiaire);
         $form->handleRequest($request);
@@ -37,21 +41,32 @@ class StagiaireController extends AbstractController
         // si (on a bien appuyer sur submit && que les infos du formalaire sont conformes au filter input qu'on aura mis)
         if ($form->isSubmitted() && $form->isValid()) {
 
-            
+
             $stagiaire = $form->getData(); // hydratation avec données du formulaire / injection des valeurs saisies dans le form
-            
+
             $em->persist($stagiaire); // équivalent du prepare dans PDO
             $em->flush(); // équivalent de insert into (execute) dans PDO
-            
-            dd($stagiaire);        
+
+            // dd($stagiaire);
             return $this->redirectToRoute('app_stagiaire');
         }
         // vue pour afficher le formulaire d'ajout
         return $this->render('stagiaire/add.html.twig', [
-            'formAddStagiaire' => $form->createView(), ]); // création du formulaire
+            'formAddStagiaire' => $form->createView(),
+            'edit' => $stagiaire->getId()]); // création du formulaire
     }
 
+    // fonction pour supprimer un stagiaire
+    #[Route('/stagiaire/{id}/delete', name: 'delete_stagiaire')]
 
+    public function delete(EntityManagerInterface $em, Stagiaire $stagiaire): Response
+    {
+
+        $em->remove($stagiaire);
+        $em->flush();
+
+        return $this->redirectToRoute('app_stagiaire');
+    }
 
     // fonction pour afficher les détails d'un stagiaire
     #[Route('/stagiaire/{id}', name: 'show_stagiaire')]

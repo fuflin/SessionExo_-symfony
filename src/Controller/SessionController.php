@@ -23,11 +23,14 @@ class SessionController extends AbstractController
     }
 
     #[Route('/session/add', name: 'add_session')]
+    #[Route('/session/{id}/edit', name: 'edit_session')]
 
-    public function add(EntityManagerInterface $em, Request $request): Response
+    public function add(EntityManagerInterface $em, Session $session = null, Request $request): Response
     {
+        if(!$session){
 
             $session = new Session();
+        }
 
         $form = $this->createForm(SessionType::class, $session);
         $form->handleRequest($request);
@@ -45,9 +48,21 @@ class SessionController extends AbstractController
 
         // vue pour afficher le formulaire d'ajout
         return $this->render('session/add.html.twig', [
-            'formAddSession' => $form->createView(), ]); // création du formulaire
+            'formAddSession' => $form->createView(),
+            'edit' => $session->getId()]); // création du formulaire
     }
 
+    // fonction pour supprimer un session
+    #[Route('/session/{id}/delete', name: 'delete_session')]
+
+    public function delete(EntityManagerInterface $em, Session $session): Response
+    {
+
+        $em->remove($session);
+        $em->flush();
+
+        return $this->redirectToRoute('app_session');
+    }
 
     #[Route('/session/{id}', name: 'show_session')]
 
