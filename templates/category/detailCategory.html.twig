@@ -8,12 +8,18 @@
     <p>
         Nom de la catégorie : {{category.name }}<br>
     </p>
-
     <h2>Liste des modules</h2>
 
-        {% for moduleSession in category.moduleSessions %}
+            {% for moduleSession in category.moduleSessions %}
 
-        {{moduleSession}}<br>
-        {% endfor %}
+            {{moduleSession}}
+            <a href="{{ path('edit_module', {'id': moduleSession.id})}}">Edit</a>
+            <a href="{{ path('delete_module', {'id': moduleSession.id})}}">Delete</a> <br><br>
+            {% endfor %}
+    <br><br>
+
+    <h2>Ajouter un module</h2>
+
+    <a href="{{ path('add_module')}}">Ajouter un module</a>
 
 {% endblock %}
