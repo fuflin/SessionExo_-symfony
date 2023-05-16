@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Category;
+use App\Form\ModuleType;
 use App\Entity\ModuleSession;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -32,7 +34,7 @@ class ModuleController extends AbstractController
         $form = $this->createForm(ModuleType::class, $module);
         $form->handleRequest($request);
 
-        // si (on a bien appuyer sur submit && que les infos du formalaire sont conformes au filter input qu'on aura mis)
+        // si (on a bien appuyer sur submit && que les infos du formulaire sont conformes au filter input qu'on aura mis)
         if ($form->isSubmitted() && $form->isValid()) {
 
             $module = $form->getData(); // hydratation avec données du formulaire / injection des valeurs saisies dans le form
@@ -40,7 +42,7 @@ class ModuleController extends AbstractController
             $em->persist($module); // équivalent du prepare dans PDO
             $em->flush(); // équivalent de insert into (execute) dans PDO
 
-            return $this->redirectToRoute('app_module');
+            return $this->redirectToRoute('app_category');
         }
 
         // vue pour afficher le formulaire d'ajout
@@ -58,6 +60,8 @@ class ModuleController extends AbstractController
         $em->remove($module);
         $em->flush();
 
-        return $this->redirectToRoute('show_category');
+        return $this->redirectToRoute('app_category');
     }
+
 }
+
