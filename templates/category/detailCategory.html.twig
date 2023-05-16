@@ -6,7 +6,7 @@
     <h1>{{ category }}</h1>
 
     <p>
-        Nom de la catégorie : {{category.name }}<br>
+        Nom de la catégorie : <strong>{{category.name }}</strong><br>
     </p>
     <h2>Liste des modules</h2>
 
@@ -14,7 +14,7 @@
 
             {{moduleSession}}
             <a href="{{ path('edit_module', {'id': moduleSession.id})}}">Edit</a>
-            <a href="{{ path('delete_module', {'id': moduleSession.id})}}">Delete</a> <br><br>
+            <a href="{{ path('delete_module', {'id': moduleSession.id})}}">Delete</a><br>
             {% endfor %}
     <br><br>
 
