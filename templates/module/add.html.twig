@@ -10,12 +10,12 @@
         <h1>Ajouter un module</h1>
     {% endif %}
 
-    {{form_start(formAddModule)}}
+    {{form_start(formAddmodule)}}
 
-        {{form_row(formAddModule.name)}}
+        {{form_row(formAddmodule.name)}}
+        {{form_row(formAddmodule.category)}}
+        {{form_row(formAddmodule.submit, {'label':'Soumettre'})}}
 
-        {{form_row(formAddModule.submit, {'label':'Soumettre'})}}
-
-    {{form_end(formAddModule)}}
+    {{form_end(formAddmodule)}}
 
 {% endblock %}
