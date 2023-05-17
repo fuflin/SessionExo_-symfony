@@ -10,30 +10,22 @@
 
 <h1>Détail du stagiaire</h1>
 
-    <h2>Stagiare {{ stagiaire }}</h2>
-
-    <p>
-        Sexe : {{stagiaire.gender }}<br>
-        Date de naissance : {{stagiaire.BirthDate | date('d/m/Y')}} ({{stagiaire.age}} ans)<br>
-        Ville : {{stagiaire.City}}<br>
-        Code postal : {{stagiaire.Cp}}<br>
-        Courriel : {{stagiaire.Mail}}<br>
-        Téléphone : {{ stagiaire.PhoneNumber}}<br>
-    </p>
-
-    <h2>Liste des sessions</h2>
-
-    {# {% if stagiaire.sessions | length == 0 %}
-
-        <p>Pas inscrit dans une session</p> #}
-
-    {# {% else %} #}
-
+<div class="card" style="width: 20rem;">
+    <div class="card-body">
+      <h4 class="card-title">Stagiare {{ stagiaire }}</h4>
+      <p class="card-text">
+          Sexe : {{stagiaire.gender }}<br>
+          Date de naissance : {{stagiaire.BirthDate | date('d/m/Y')}} ({{stagiaire.age}} ans)<br>
+          Ville : {{stagiaire.City}}<br>
+          Code postal : {{stagiaire.Cp}}<br>
+          Courriel : {{stagiaire.Mail}}<br>
+          Téléphone : {{ stagiaire.PhoneNumber}}<br>
+        </p>
+        <h6 class="card-subtitle mb-2 text-muted" style="text-align: center;">Liste des sessions</h6>
         {% for session in stagiaire.sessions %}
-        <a href="{{ path('show_session', {'id':session.id})}}">{{ session }}</a><br>
+        <a href="{{ path('show_session', {'id':session.id})}}" class="btn btn-primary" style="display: flex; justify-content: center;">{{ session }}</a><br>
         {% endfor %}
-
-    {# {% endif %} #}
-    
+    </div>
+  </div>
 
 {% endblock %}

@@ -4,16 +4,24 @@
 
 {% block body %}
 
-    <h1>Listes des sessions</h1>
+    <h1 style="text-align: center;">Listes des sessions</h1><br><br>
 
-    <a href="{{ path('add_session')}}">Ajouter une session</a><br><br><br>
+    <h4 style="text-align: center;"><a href="{{ path('add_session')}}" class="btn btn-primary" style="width: 25%">Ajouter une session</a></h4><br><br>
 
     {% for session in sessions %}
-
-        <a href="{{ path('show_session', {'id': session.id})}}">{{session}}</a>
-        <a href="{{ path('edit_session', {'id': session.id})}}" class="btn btn-info">Edit</a>
-        <a href="{{ path('delete_session', {'id': session.id})}}" class="btn btn-danger">Delete</a> <br><br>
-
+    <div class="row" style="display: flex; justify-content: center;">
+        <div class="col-sm-6" >
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title" style="text-align: center;"><a href="{{ path('show_session', {'id': session.id})}}" style="text-align: center;">{{session}}</a></h5>
+              <div class="button" style="text-align: center;">
+                <a href="{{ path('edit_session', {'id': session.id})}}" class="btn btn-info">Edit</a>
+                <a href="{{ path('delete_session', {'id': session.id})}}" class="btn btn-danger">Delete</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     {% endfor %}
 
 {% endblock %}
