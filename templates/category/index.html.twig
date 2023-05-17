@@ -11,8 +11,8 @@
     {% for category in categories %}
 
         <a href="{{ path('show_category', {'id': category.id})}}">{{category}}</a>
-        <a href="{{ path('edit_category', {'id': category.id})}}">Edit</a>
-        <a href="{{ path('delete_category', {'id': category.id})}}">Delete</a> <br><br>
+        <a href="{{ path('edit_category', {'id': category.id})}}" class="btn btn-info">Edit</a>
+        <a href="{{ path('delete_category', {'id': category.id})}}" class="btn btn-danger">Delete</a> <br><br>
 
     {% endfor %}
 

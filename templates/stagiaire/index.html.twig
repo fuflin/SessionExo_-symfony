@@ -15,8 +15,8 @@
     {% for stagiaire in stagiaires %}
 
         <a href="{{ path('show_stagiaire', {'id': stagiaire.id})}}">{{stagiaire}}</a>
-        <a href="{{ path('edit_stagiaire', {'id': stagiaire.id})}}">Edit</a>
-        <a href="{{ path('delete_stagiaire', {'id': stagiaire.id})}}">Delete</a> <br><br>
+        <a href="{{ path('edit_stagiaire', {'id': stagiaire.id})}}" class="btn btn-info">Edit</a>
+        <a href="{{ path('delete_stagiaire', {'id': stagiaire.id})}}" class="btn btn-danger">Delete</a> <br><br>
 
     {% endfor %}
 

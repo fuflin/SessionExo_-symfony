@@ -13,8 +13,8 @@
             {% for moduleSession in category.moduleSessions %}
 
             {{moduleSession}}
-            <a href="{{ path('edit_module', {'id': moduleSession.id})}}">Edit</a>
-            <a href="{{ path('delete_module', {'id': moduleSession.id})}}">Delete</a><br>
+            <a href="{{ path('edit_module', {'id': moduleSession.id})}}" class="btn btn-info">Edit</a>
+            <a href="{{ path('delete_module', {'id': moduleSession.id})}}" class="btn btn-danger">Delete</a><br>
             {% endfor %}
     <br><br>
 
