@@ -21,15 +21,17 @@ class ModuleController extends AbstractController
         ]);
     }
 
-    #[Route('/module/add', name: 'add_module')]
-    #[Route('/module/{id}/edit', name: 'edit_module')]
+    #[Route('/module/add/{categoryID}', name: 'add_module')]
+    #[Route('/module/{id}/edit/{categoryID}', name: 'edit_module')]
 
-    public function add(EntityManagerInterface $em, ModuleSession $module = null, Request $request): Response
+    public function add(EntityManagerInterface $em, ModuleSession $module = null, Request $request, $categoryID = null): Response
     {
         if(!$module){
 
             $module = new ModuleSession();
         }
+
+        $category= $em->getRepository(Category::class)->find($categoryID);
 
         $form = $this->createForm(ModuleType::class, $module);
         $form->handleRequest($request);
@@ -37,12 +39,14 @@ class ModuleController extends AbstractController
         // si (on a bien appuyer sur submit && que les infos du formulaire sont conformes au filter input qu'on aura mis)
         if ($form->isSubmitted() && $form->isValid()) {
 
+            $module->setCategory($category);
+
             $module = $form->getData(); // hydratation avec données du formulaire / injection des valeurs saisies dans le form
 
             $em->persist($module); // équivalent du prepare dans PDO
             $em->flush(); // équivalent de insert into (execute) dans PDO
 
-            return $this->redirectToRoute('app_category');
+            return $this->redirectToRoute('show_category', ['id'=>$categoryID]);
         }
 
         // vue pour afficher le formulaire d'ajout
