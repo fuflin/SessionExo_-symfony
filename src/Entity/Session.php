@@ -83,11 +83,11 @@ class Session
         $this->date_end = $date_end;
         return $this;
     }
-
+    
     public function getDuree(){
 
-        $interval = date_diff($this->date_end, $this->date_begin);
-        return $interval->format('%d days');
+        $interval = $this->date_end->diff($this->date_begin);
+        return $interval->format('%m mois');
     }
 
     public function getNbPlace(): ?int
