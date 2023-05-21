@@ -39,6 +39,11 @@ class SessionRepository extends ServiceEntityRepository
         }
     }
 
+    public function addStagiaireToSession(Session $session){
+
+        
+    }
+
     public function sessionEmpty(){
 
         $query = $this->getEntityManager()->createQuery(
