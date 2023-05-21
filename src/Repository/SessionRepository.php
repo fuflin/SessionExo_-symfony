@@ -39,6 +39,33 @@ class SessionRepository extends ServiceEntityRepository
         }
     }
 
+    public function sessionEmpty(){
+
+        $query = $this->getEntityManager()->createQuery(
+
+            "SELECT st.firstname, st.lastname, s.name
+            FROM session_stagiaire AS sst
+            INNER JOIN stagiaire AS st ON stagiaire_id = st.id
+            INNER JOIN session AS s ON session_id = s.id
+            WHERE session_id = 0");
+
+        return $query->getResult();
+    }
+
+    public function sessionTake(){
+
+        $query = $this->getEntityManager()->createQuery(
+
+            "SELECT st.firstname, st.lastname, s.name
+            FROM session_stagiaire AS sst
+            INNER JOIN stagiaire AS st ON stagiaire_id = st.id
+            INNER JOIN session AS s ON session_id = s.id
+            WHERE session_id = 3");
+
+        return $query->getResult();
+    }
+
+
 //    /**
 //     * @return Session[] Returns an array of Session objects
 //     */
