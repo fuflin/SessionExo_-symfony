@@ -185,6 +185,29 @@ class Session
         return $this;
     }
 
+    public function getResa()
+    {
+        $nbPlcReserv = count($this->stagiaires);
+
+        $nbDispos = 0;
+
+        if (count($this->stagiaires) != 0) {
+
+            echo $nbPlcReserv;
+
+        } else {
+
+            echo "Places restantes";
+        }
+    }
+
+    public function getDispo(){
+        $nbPlaces = $this->Nb_place ;
+        $nbPlcReserv = count($this->stagiaires);
+        $nbDisponible = $nbPlaces - $nbPlcReserv ;
+        return $nbDisponible;
+    }
+
     public function __toString()
     {
         return $this->getName();
