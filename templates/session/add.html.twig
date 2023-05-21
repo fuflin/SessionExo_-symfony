@@ -4,7 +4,11 @@
 
 {% block body %} {# parti contenant ce qu'on veux affiché #}
 
-<h1>Ajouter un session</h1>
+{% if edit %}
+        <h1 style="text-align: center;">Modifier infos session</h1>
+    {% else %}
+        <h1 style="text-align: center;">Ajouter une session</h1>
+{% endif %}
 
     {{form_start(formAddSession)}}
 

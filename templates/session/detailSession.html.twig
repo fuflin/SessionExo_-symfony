@@ -3,28 +3,32 @@
 {% block title %}Détail d'une session{% endblock %}
 
 {% block body %}
-    <h1>{{ session }}</h1>
 
-    <p>
-        Nom de la Session : {{session.name }}<br>
+    <h1 style="text-align: center;">Détail du session</h1><br><br>
+
+<div style="display: flex; justify-content: center;">
+    <div class="card" style="width: 20rem;">
+        <div class="card-body" >
+        <h4 class="card-title" style="text-align: center;">Session<br> <strong>{{ session }}</strong></h4><br>
+        <p class="card-text">
         Date de début : {{session.DateBegin | date('d/m/Y')}}<br>
         Date de fin : {{session.DateEnd | date('d/m/Y')}}<br>
         Durée : {{session.Duree}}<br>
         Nombre de places : {{ session.NbPlace}}<br>
-    </p>
-
-    {# <h2>Liste des employés</h2>
-
-    {% if entreprise.employes | length == 0 %}
-
-        <p>Pas d'employés dans cette entreprise</p>
-
-    {% else %}
-
-        {% for employe in entreprise.employes %}
-        <a href="{{ path('show_employe', {'id':employe.id})}}">{{ employe }}</a><br>
+        </p><br>
+        {# <h4 class="card-subtitle mb-2 text-muted" style="text-align: center;"><strong>{{session.category.name}}</strong></h4><br>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+                {% for moduleSession in category.moduleSessions %}
+                <p style="text-align: center;">module <strong>{{moduleSession}}</strong><br></p>
+                {% endfor %}
+            </li><br>
+        </ul><br> #}
+        <h6 class="card-subtitle mb-2 text-muted" style="text-align: center;"><strong>Liste des stagiaires inscrits</strong></h6>
+        {% for session in session.stagiaires %}
+        <a href="{{ path('show_session', {'id':session.id})}}" class="btn btn-primary" style="display: flex; justify-content: center;">{{ session }}</a><br>
         {% endfor %}
-
-    {% endif %}
-     #}
+        </div>
+    </div>
+</div>
 {% endblock %}

@@ -3,23 +3,25 @@
 {% block title %}Détail d'une category{% endblock %}
 
 {% block body %}
-    <h1>{{ category }}</h1>
 
-    <p>
-        Nom de la catégorie : <strong>{{category.name }}</strong><br>
-    </p>
-    <h2>Liste des modules</h2>
+    <h1 style="text-align: center;">Détail de la catégorie</h1><br><br>
 
-            {% for moduleSession in category.moduleSessions %}
-
-            {{moduleSession}}
-            <a href="{{ path('edit_module', {'id': moduleSession.id, 'categoryID': category.id})}}" class="btn btn-info">Edit</a>
-            <a href="{{ path('delete_module', {'id': moduleSession.id})}}" class="btn btn-danger">Delete</a><br>
-            {% endfor %}
-    <br><br>
-
-    <h2>Ajouter un module</h2>
-
-    <a href="{{ path('add_module', {'categoryID': category.id})}}">Ajouter un module</a>
+        <div style="display: flex; justify-content: center;">
+            <div class="card" style="width: 20rem;">
+                <div class="card-body" >
+                <h4 class="card-title" style="text-align: center;"><strong>{{category.name}}</strong></h4><br>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                {% for moduleSession in category.moduleSessions %}
+                                <p style="text-align: center;">module <strong>{{moduleSession}}</strong><br></p>
+                                <a href="{{ path('edit_module', {'id': moduleSession.id, 'categoryID': category.id})}}" class="btn btn-info" style="display: flex; justify-content: center; width: 50%; margin: auto; margin-bottom: 5px;">Edit</a>
+                                <a href="{{ path('delete_module', {'id': moduleSession.id, 'categoryID': category.id})}}" class="btn btn-danger" style="display: flex; justify-content: center;width: 50%; margin: auto;">Delete</a><br>
+                                {% endfor %}
+                            </li><br>
+                        </ul><br>
+                <h6 class="card-subtitle mb-2 text-muted" style="text-align: center;"><strong><a href="{{ path('add_module', {'categoryID': category.id})}}" class="btn btn-secondary">Ajouter un module</a></strong></h6>
+                </div>
+            </div>
+        </div>
 
 {% endblock %}

@@ -4,16 +4,24 @@
 
 {% block body %}
 
-    <h1>Listes des catégories</h1>
+    <h1 style="text-align: center;">Listes des categories</h1><br><br>
 
-    <a href="{{ path('add_category')}}">Ajouter une category</a><br><br><br>
+    <h4 style="text-align: center;"><a href="{{ path('add_category')}}" class="btn btn-primary" style="width: 25%">Ajouter une category</a></h4><br><br>
 
     {% for category in categories %}
-
-        <a href="{{ path('show_category', {'id': category.id})}}">{{category}}</a>
-        <a href="{{ path('edit_category', {'id': category.id})}}" class="btn btn-info">Edit</a>
-        <a href="{{ path('delete_category', {'id': category.id})}}" class="btn btn-danger">Delete</a> <br><br>
-
+    <div class="row" style="display: flex; justify-content: center;">
+        <div class="col-sm-6" >
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title" style="text-align: center;"><a href="{{ path('show_category', {'id': category.id})}}" style="text-align: center;">{{category}}</a></h5>
+              <div class="button" style="text-align: center;">
+                <a href="{{ path('edit_category', {'id': category.id})}}" class="btn btn-info">Edit</a>
+                <a href="{{ path('delete_category', {'id': category.id})}}" class="btn btn-danger">Delete</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div><br>
     {% endfor %}
 
 {% endblock %}

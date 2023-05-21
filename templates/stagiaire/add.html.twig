@@ -5,24 +5,42 @@
 {% block body %} {# parti contenant ce qu'on veux affiché #}
 
 {% if edit %} {# on vérifie l'état de edit qui est un booléen #}
-        <h1>Editer un employé</h1>
+        <h1 style="text-align: center;">Modifier infos stagiaire</h1>
     {% else %}
-        <h1>Ajouter un employé</h1>
+        <h1 style="text-align: center;">Ajouter un stagiaire</h1>
     {% endif %}
 
     {{form_start(formAddStagiaire)}}
 
-        {{form_row(formAddStagiaire.firstname)}}
-        {{form_row(formAddStagiaire.lastname)}}
-        {{form_row(formAddStagiaire.birth_date)}}
-        {{form_row(formAddStagiaire.gender)}}
-        {{form_row(formAddStagiaire.city)}}
-        {{form_row(formAddStagiaire.cp)}}
-        {{form_row(formAddStagiaire.mail)}}
-        {{form_row(formAddStagiaire.phone_number)}}
-        {{form_row(formAddStagiaire.sessions)}}
-
-        {{form_row(formAddStagiaire.submit, {'label':'Soumettre'})}}
+    <div class="form" style="display: flex; flex-wrap: wrap;">
+        <div style="width: 30%; margin: 20px;">
+            {{form_row(formAddStagiaire.firstname)}}
+        </div><br>
+        <div style="width: 30%; margin: 20px;">
+            {{form_row(formAddStagiaire.lastname)}}
+        </div><br>
+        <div style="width: 30%; margin: 20px;">
+            {{form_row(formAddStagiaire.birth_date)}}
+        </div><br>
+        <div style="width: 30%; margin: 20px;">
+            {{form_row(formAddStagiaire.gender)}}
+        </div><br>
+        <div style="width: 30%; margin: 20px;">
+            {{form_row(formAddStagiaire.city)}}
+        </div><br>
+        <div style="width: 30%; margin: 20px;">
+            {{form_row(formAddStagiaire.cp)}}
+        </div><br>
+        <div style="width: 30%; margin: 20px;">
+            {{form_row(formAddStagiaire.mail)}}
+        </div><br>
+        <div style="width: 30%; margin: 20px;">
+            {{form_row(formAddStagiaire.phone_number)}}
+        </div><br>
+        <div style="width: 30%; margin: 30px;">
+            {{form_row(formAddStagiaire.submit, {'label':'Soumettre'})}}
+        </div>
+    </div>
 
     {{form_end(formAddStagiaire)}}
 
