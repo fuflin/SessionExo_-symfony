@@ -17,20 +17,14 @@ class FormStagiaireType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('firstname', TextType::class)
-            ->add('lastname', TextType::class)
-            ->add('birth_date', DateType::class, [ // ici on aura un type date sans les heures
-                'widget' => 'single_text'])
-            ->add('gender', TextType::class)
-            ->add('city', TextType::class)
-            ->add('cp', TextType::class)
-            ->add('mail', TextType::class)
-            ->add('phone_number', TextType::class)
-            ->add('sessions', EntityType::class, [
-                'class' => Session::class,
-                'choice_label' => 'name',
-                'multiple' => true,
-                'expanded' => true])
+            ->add('firstname', TextType::class, ['attr'=> ['class' => 'form-control']])
+            ->add('lastname', TextType::class, ['attr'=> ['class' => 'form-control']])
+            ->add('birth_date', DateType::class, ['widget' => 'single_text', 'attr' => ['class' => 'form-control datepicker']])
+            ->add('gender', TextType::class, ['attr'=> ['class' => 'form-control']])
+            ->add('city', TextType::class, ['attr'=> ['class' => 'form-control']])
+            ->add('cp', TextType::class, ['attr'=> ['class' => 'form-control']])
+            ->add('mail', TextType::class, ['attr'=> ['class' => 'form-control']])
+            ->add('phone_number', TextType::class, ['attr'=> ['class' => 'form-control']])
             ->add('submit', SubmitType::class, [
                 'attr' => ['class' => 'btn btn-secondary']])
         ;

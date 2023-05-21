@@ -56,7 +56,7 @@ class ModuleController extends AbstractController
     }
 
     // fonction pour supprimer un module
-    #[Route('/module/{id}/delete', name: 'delete_module')]
+    #[Route('/module/{id}/delete/categoryID', name: 'delete_module')]
 
     public function delete(EntityManagerInterface $em, ModuleSession $module): Response
     {
