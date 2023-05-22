@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Session;
+use App\Entity\Stagiaire;
 use App\Form\SessionType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -65,12 +66,35 @@ class SessionController extends AbstractController
     }
 
     #[Route('/session/{id}', name: 'show_session')]
-
-    public function show(Session $session): Response
+    // affichage des stagiaires non inscrit à une session
+    public function show(EntityManagerInterface $em, Session $session): Response
     {
+        $stagiaires = $em->getRepository(Stagiaire::class)->showStagInSession($session); //on utilise la fonction précedement créer dans le repository pour récupérer les stagiaires
         return $this->render('session/detailSession.html.twig', [
            'session' => $session,
+           'stagiaires' => $stagiaires
         ]);
+    }
+
+    #[Route('/session/{id}/addStagiaire/{idStagiaire}', name: 'add_to_session')]
+    #[Route('/session/{id}/removeStagiaire/{idStagiaire}', name: 'remove_session')]
+
+    // pour la fonction on met en argument id pour la session et idStagiaire pour le stagiaire à modifier
+    public function modifySession(EntityManagerInterface $em, Session $session, $id, $idStagiaire){
+
+        $stagiaire = $em->getRepository(Stagiaire::class)->find($idStagiaire);
+
+        if($session->getStagiaires()->contains($stagiaire)){
+
+            $session->removeStagiaire($stagiaire);
+        } else {
+
+            $session->addStagiaire($stagiaire);
+        }
+
+        $em->flush();
+        return $this->redirectToRoute('show_session', ['id' => $id]);
+
     }
 
 }
