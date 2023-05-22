@@ -82,17 +82,20 @@ class SessionController extends AbstractController
     // pour la fonction on met en argument id pour la session et idStagiaire pour le stagiaire à modifier
     public function modifySession(EntityManagerInterface $em, Session $session, $id, $idStagiaire){
 
-        $stagiaire = $em->getRepository(Stagiaire::class)->find($idStagiaire);
+        $stagiaire = $em->getRepository(Stagiaire::class)->find($idStagiaire); // on instancie l'entity manager pour récupére l'id du stagiaire
 
-        if($session->getStagiaires()->contains($stagiaire)){
+        // si on a déjà un stagiaire en session alors
+        if($session->getStagiaires()->contains($stagiaire)){ 
 
-            $session->removeStagiaire($stagiaire);
-        } else {
+            $session->removeStagiaire($stagiaire); // j'utilise la fonction pour retiré un stagiaire de la session
 
-            $session->addStagiaire($stagiaire);
+        } else { // sinon
+
+            $session->addStagiaire($stagiaire); // j'ajoute un stagiaire à l'aide de la fonction 
         }
 
-        $em->flush();
+        $em->flush(); //on enregistre dans la bdd
+
         return $this->redirectToRoute('show_session', ['id' => $id]);
 
     }
