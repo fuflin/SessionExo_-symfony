@@ -2,9 +2,10 @@
 
 namespace App\Repository;
 
+use App\Entity\Session;
 use App\Entity\Stagiaire;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @extends ServiceEntityRepository<Stagiaire>
@@ -37,6 +38,36 @@ class StagiaireRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+    public function showStagInSession(Session $session){
+
+        // on instancie l'entity manager pour récupérer les données pour une fonction ultérieur
+        $em = $this->getEntityManager();
+
+        // on instancie la fonction pour créer la requête DQL
+        $sub = $em->createQueryBuilder();
+
+        // on prépare la requête pour afficher les stagiaires inscirts dans une
+
+        $sub->select('st.id') // on choisi ce qu'on veux récupérer
+                ->from('App\Entity\Stagiaire', 'st') // on dit d'où on récupère les infos (adresse de l'entité)
+                ->join('st.sessions', 's') // on lie les tables entre elles (ici la table session et la table associative)
+                ->where('st.id = :id') // on précise la condition
+                ->setParameter('id', $session); // on défini le paramètre
+
+        $query = $em->createQueryBuilder();
+
+        // on prépare la sous-requête pour afficher les stagiaires non inscrit dans une session
+
+        $query->select('sta.id, sta.firstname, sta.lastname') // on choisi ce qu'on veux récupérer
+                ->from('App\Entity\Stagiaire', 'sta') // on dit d'où on récupère les infos (adresse de l'entité)
+                ->where($query->expr()->notIn('sta.id',  $sub->getDQL()))
+        // dans le where(variable->fonction expression pour appeler->notIn((n'est pas/ n'a pas) ici l'id stagiaire, $sub->dans la requête précédente)
+                ->setParameter('id', $session);
+
+            return $query->getQuery()->getResult();
+
     }
 
 //    /**
