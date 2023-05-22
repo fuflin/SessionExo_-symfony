@@ -62,4 +62,9 @@ class Programme
 
         return $this;
     }
+
+    public function __toString()
+    {
+        return $this->getModule().'<br>'.$this->getNbJours();
+    }
 }
