@@ -4,30 +4,39 @@
 
 {% block body %}
 
-    <h1 style="text-align: center;">Détail du session</h1><br><br>
+    <h1 style="text-align: center;">Détail de la session</h1><br><br>
 
 <div style="display: flex; justify-content: center;">
     <div class="card" style="width: 20rem;">
         <div class="card-body" >
-        <h4 class="card-title" style="text-align: center;">Session<br> <strong>{{ session }}</strong></h4><br>
+        <h2 class="card-title" style="text-align: center;">Session<br> <strong>{{ session }}</strong></h2><br>
         <p class="card-text">
         Date de début : {{session.DateBegin | date('d/m/Y')}}<br>
         Date de fin : {{session.DateEnd | date('d/m/Y')}}<br>
         Durée : {{session.Duree}}<br>
         Nombre de places : {{ session.NbPlace}}<br>
         </p><br>
-        {# <h4 class="card-subtitle mb-2 text-muted" style="text-align: center;"><strong>{{session.category.name}}</strong></h4><br>
+        <h4 class="card-subtitle mb-2 text-muted" style="text-align: center;"><strong>Liste des stagiaires inscrits</strong></h4><br>
         <ul class="list-group list-group-flush">
             <li class="list-group-item">
-                {% for moduleSession in category.moduleSessions %}
-                <p style="text-align: center;">module <strong>{{moduleSession}}</strong><br></p>
+                {% for stagiaire in session.stagiaires %}
+                <p style="text-align: center;">Stagiaire: <strong>{{stagiaire}}</strong><br></p>
+                <a href="{{ path('remove_session', {'id': session.id, 'idStagiaire': stagiaire.id})}}" class="btn btn-danger" style="display: flex; justify-content: center;">Retirer de la session</a>
                 {% endfor %}
             </li><br>
-        </ul><br> #}
-        <h6 class="card-subtitle mb-2 text-muted" style="text-align: center;"><strong>Liste des stagiaires inscrits</strong></h6>
-        {% for session in session.stagiaires %}
-        <a href="{{ path('show_session', {'id':session.id})}}" class="btn btn-primary" style="display: flex; justify-content: center;">{{ session }}</a><br>
-        {% endfor %}
+        </ul><br>
+        <h4 class="card-subtitle mb-2 text-muted" style="text-align: center;"><strong>Liste des stagiaires non inscrits</strong></h4><br>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+                {% for stagiaire in stagiaires %}
+                <p style="text-align: center;">Stagiaire: <strong>
+                    {{stagiaire.firstname}}
+                    {{stagiaire.lastname}}<br></strong>
+                </p>
+                <a href="{{ path('add_to_session', {'id': session.id, 'idStagiaire': stagiaire.id})}}" class="btn btn-primary" style="display: flex; justify-content: center;">Ajouter à la session</a><br>
+                {% endfor %}
+            </li><br>
+        </ul><br>
         </div>
     </div>
 </div>
