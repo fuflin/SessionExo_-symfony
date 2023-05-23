@@ -49,8 +49,10 @@ class SessionController extends AbstractController
 
         // vue pour afficher le formulaire d'ajout
         return $this->render('session/add.html.twig', [
-            'formAddSession' => $form->createView(),
-            'edit' => $session->getId()]); // création du formulaire
+            'form' => $form->createView(),
+            'edit' => $session->getId(),
+            'sessionId' => $session->getId()
+        ]); // création du formulaire
     }
 
     // fonction pour supprimer un session
@@ -66,13 +68,15 @@ class SessionController extends AbstractController
     }
 
     #[Route('/session/{id}', name: 'show_session')]
+
     // affichage des stagiaires non inscrit à une session
     public function show(EntityManagerInterface $em, Session $session): Response
     {
         $stagiaires = $em->getRepository(Stagiaire::class)->showStagInSession($session); //on utilise la fonction précedement créer dans le repository pour récupérer les stagiaires
         return $this->render('session/detailSession.html.twig', [
            'session' => $session,
-           'stagiaires' => $stagiaires
+           'stagiaires' => $stagiaires,
+           'programme' => $session->getProgrammes()
         ]);
     }
 
