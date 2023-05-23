@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter un Programme{% endblock %}
+
+{% block body %} {# parti contenant ce qu'on veux affiché #}
+
+{% if edit %}
+        <h1 style="text-align: center;">Modifier infos session</h1>
+    {% else %}
+        <h1 style="text-align: center;">Ajouter une session</h1>
+{% endif %}
+
+    {{form_start(form)}}
+
+        {# {{form_row(form.name)}} #}
+
+        {{form_row(form.session)}}
+
+        {{form_row(form.module)}}
+
+        {{form_row(form.nb_jours)}}
+
+        {# {{form_row(form.submit, {'label':'Ajouter' })}} #}
+
+    {{form_end(form)}}
+
+{% endblock %}
