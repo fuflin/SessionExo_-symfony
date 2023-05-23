@@ -6,9 +6,13 @@
 
     <h1 style="text-align: center;">Listes des programmes</h1><br><br>
 
-    <h4 style="text-align: center;"><a href="" class="btn btn-primary" style="width: 25%">Ajouter une programme</a></h4><br><br>
+    
+
+    <h4 style="text-align: center;"><a href="{{ path('add_programme')}}" class="btn btn-primary" style="width: 25%">Ajouter un Programme</a></h4><br><br>
 
     {% for programme in programmes %}
+
+    {{programme}}
     
     {% endfor %}
 

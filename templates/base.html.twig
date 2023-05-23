@@ -10,18 +10,15 @@
             <link rel="stylesheet" href="{{asset('css/style.css')}}">
         {% endblock %}
 
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-        {% endblock %}
     </head>
     <body>
         {% if app.user %}
-            <a href="{{ path('app_logout') }}"> Se déconnecter</a>
+        <a href="{{ path('app_logout') }}"> Se déconnecter</a>
         {% else %}
-            <a href="{{ path('app_login') }}"> Se connecter</a>
-            <a href="{{ path('app_register') }}"> S'enregistrer</a>
+        <a href="{{ path('app_login') }}"> Se connecter</a>
+        <a href="{{ path('app_register') }}"> S'enregistrer</a>
         {% endif %}
-
+        
         {% if is_granted('ROLE_ADMIN') %}
         {% endif %}
         <br><br>
@@ -34,5 +31,11 @@
             </ul>
         </nav>
         {% block body %}{% endblock %}
+
+        {% block javascripts %}
+            <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
+            <script>"{{asset('js/gsf.js')}}"</script>
+            <script>"{{asset('js/script.js')}}"</script>
+        {% endblock %}
     </body>
 </html>
