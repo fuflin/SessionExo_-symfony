@@ -13,7 +13,7 @@
 <div style="display: flex; justify-content: center;">
     <div class="card" style="width: 20rem;">
         <div class="card-body" >
-        <h4 class="card-title" style="text-align: center;">Stagiaire<br> <strong>{{ stagiaire }}</strong></h4><br>
+        <h4 class="card-title" style="color: blue">Fiche Stagiaire<br> <strong>{{ stagiaire }}</strong></h4><br>
         <p class="card-text">
             Sexe : {{stagiaire.gender }}<br>
             Date de naissance : {{stagiaire.BirthDate | date('d/m/Y')}} ({{stagiaire.age}} ans)<br>
@@ -22,9 +22,9 @@
             Courriel : {{stagiaire.Mail}}<br>
             Téléphone : {{ stagiaire.PhoneNumber}}<br>
             </p>
-            <h6 class="card-subtitle mb-2 text-muted" style="text-align: center;">Liste des sessions</h6>
+            <h4 style="color: blue">Liste des sessions</h4>
             {% for session in stagiaire.sessions %}
-            <a href="{{ path('show_session', {'id':session.id})}}" class="btn btn-primary" style="display: flex; justify-content: center;">{{ session }}</a><br>
+            <p style="display: flex; justify-content: center;"></p><strong>{{ session }}</strong><br> (du {{session.dateBegin | date('d/m/Y')}} au {{session.dateEnd | date('d/m/Y')}})<br>
             {% endfor %}
         </div>
     </div>
