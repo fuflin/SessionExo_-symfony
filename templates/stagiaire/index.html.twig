@@ -10,11 +10,11 @@
 
     <h1 style="text-align: center;">Listes des stagiaires</h1><br><br>
 
-    <h4 style="text-align: center;"><a href="{{ path('add_stagiaire')}}" class="btn btn-primary" style="width: 25%">Ajouter une stagiaire</a></h4><br><br>
+    <h4 style="text-align: center;"><a href="{{ path('add_stagiaire')}}" class="btn btn-primary" style="width: 15%">Ajouter un stagiaire</a></h4><br><br>
 
     {% for stagiaire in stagiaires %}
     <div class="row" style="display: flex; justify-content: center;">
-        <div class="col-sm-6">
+        <div class="col-sm-6" style="width: 30%;">
           <div class="card">
             <div class="card-body">
               <h5 class="card-title" style="text-align: center;">Stagiaire: <br><a href="{{ path('show_stagiaire', {'id': stagiaire.id})}}" style="text-align: center;">{{stagiaire}}</a></h5><br>
