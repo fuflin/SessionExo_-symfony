@@ -16,7 +16,7 @@ class ProgrammeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            // ->add('session', HiddenType::class)
+            // ->add('session', HiddenType::class) // problème résolu par le formateur d'elan formation Nicolas Gutknecht
             ->add('module', EntityType::class, [
                 'class' => ModuleSession::class,
                 'choice_label' => 'name',
