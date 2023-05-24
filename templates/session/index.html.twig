@@ -10,7 +10,7 @@
 
     {% for session in sessions %}
     <div class="row" style="display: flex; justify-content: center;">
-        <div class="col-sm-6" >
+        <div class="col-sm-6" style=" width: 30%; ">
           <div class="card">
             <div class="card-body">
               <h5 class="card-title" style="text-align: center;"><a href="{{ path('show_session', {'id': session.id})}}" style="text-align: center;">{{session}}</a></h5>
@@ -21,7 +21,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div><br>
     {% endfor %}
 
 {% endblock %}
