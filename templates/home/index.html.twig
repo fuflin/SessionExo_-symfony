@@ -10,9 +10,8 @@
 {% endif %}
 
 <table class="table table-dark table-striped-columns">
-    <thead>
-        <thead>
-            <tr>
+    <thead style="text-align: center;">
+        <tr>
             <th>Intitulé Session</th>
             <th>Date de debut</th>
             <th>Date de fin</th>
@@ -22,7 +21,7 @@
             <th>Détail Programme</th>
         </tr>
     </thead>
-    <tbody>
+    <tbody style="text-align: center;">
         {% for session in sessions %}
         <tr>
             <td>{{session}}</td>
@@ -31,7 +30,7 @@
             <td>{{session.NbPlace}}</td>
             <td>{{session.resa}}</td>
             <td>{{session.dispo}}</td>
-            <td><a href="{{ path('show_session', {'id': session.id})}}">Détail</a></td>
+            <td><a href="{{ path('show_session', {'id': session.id})}}" style="color: white;">Cliquez ici</a></td>
         </tr>
         {% endfor %}
     </tbody>
