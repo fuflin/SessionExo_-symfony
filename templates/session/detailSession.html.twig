@@ -8,16 +8,15 @@
 
     <h2 style="text-align: center; color: black;">Session<br> <strong>{{ session }}</strong></h2><br>
     <table class="table table-dark table-striped-columns" >
-        <thead>
-            <thead>
-                <tr>
-                <th>Date de début</th>
-                <th>Date de fin</th>
-                <th>Durée</th>
-                <th>Nombre de places</th>
+        <thead style="text-align: center;">
+            <tr>
+                <th><strong>Date de début</strong></th>
+                <th><strong>Date de fin</strong></th>
+                <th><strong>Durée</strong></th>
+                <th><strong>Nombre de places</strong></th>
             </tr>
         </thead>
-        <tbody>
+        <tbody style="text-align: center;">
             <tr>
                 <td>{{session.DateBegin | date('d/m/Y')}}</td>
                 <td>{{session.DateEnd | date('d/m/Y')}}</td>
@@ -28,15 +27,14 @@
     </table>
     <br>
     <table class="table table-dark table-striped-columns">
-        <thead>
-            <thead>
-                <tr>
-                <th>Catégories</th>
-                <th>Modules</th>
-                <th>Durée</th>
+        <thead style="text-align: center;">
+            <tr>
+                <th><strong>Catégories</strong></th>
+                <th><strong>Modules</strong></th>
+                <th><strong>Durée</strong></th>
             </tr>
         </thead>
-        <tbody>
+        <tbody style="text-align: center;">
             {% for programme in session.programmes %}
             <tr>
                 <td>{{programme.module.category}}</td>
@@ -45,33 +43,35 @@
             </tr>
             {% endfor %}
         </tbody>
-    </table>
-
-    <div style="display: flex; justify-content: center;">
-        <div class="card" style="width: 20rem;">
-            <div class="card-body" >
-            <h4 class="card-subtitle mb-2 text-muted" style="text-align: center;"><strong>Liste des stagiaires inscrits</strong></h4><br>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">
-                    {% for stagiaire in session.stagiaires %}
-                    <p style="text-align: center;">Stagiaire: <strong>{{stagiaire}}</strong><br></p>
-                    <a href="{{ path('remove_session', {'id': session.id, 'idStagiaire': stagiaire.id})}}" class="btn btn-danger" style="display: flex; justify-content: center;">Retirer de la session</a>
-                    {% endfor %}
-                </li><br>
-            </ul><br>
-            <h4 class="card-subtitle mb-2 text-muted" style="text-align: center;"><strong>Liste des stagiaires non inscrits</strong></h4><br>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">
-                    {% for stagiaire in stagiaires %}
-                    <p style="text-align: center;">Stagiaire: <strong>
-                        {{stagiaire.firstname}}
-                        {{stagiaire.lastname}}<br></strong>
-                    </p>
-                    <a href="{{ path('add_to_session', {'id': session.id, 'idStagiaire': stagiaire.id})}}" class="btn btn-primary" style="display: flex; justify-content: center;">Ajouter à la session</a><br>
-                    {% endfor %}
-                </li><br>
-            </ul><br>
+    </table><br>
+    {% if is_granted('ROLE_ADMIN') %}
+        <div style="display: flex; justify-content: center;">
+            <div class="card" style="width: 20rem;">
+                <div class="card-body" >
+                <h4 class="card-subtitle mb-2 text-muted" style="text-align: center;"><strong>Liste des stagiaires inscrits</strong></h4><br>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        {% for stagiaire in session.stagiaires %}
+                        <p style="text-align: center;">Stagiaire: <strong>{{stagiaire}}</strong><br></p>
+                        <a href="{{ path('remove_session', {'id': session.id, 'idStagiaire': stagiaire.id})}}" class="btn btn-danger" style="display: flex; justify-content: center;">Retirer de la session</a>
+                        {% endfor %}
+                    </li><br>
+                </ul><br>
+                <h4 class="card-subtitle mb-2 text-muted" style="text-align: center;"><strong>Liste des stagiaires non inscrits</strong></h4><br>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        {% for stagiaire in stagiaires %}
+                        <p style="text-align: center;">Stagiaire: <strong>
+                            {{stagiaire.firstname}}
+                            {{stagiaire.lastname}}<br></strong>
+                        </p>
+                        <a href="{{ path('add_to_session', {'id': session.id, 'idStagiaire': stagiaire.id})}}" class="btn btn-primary" style="display: flex; justify-content: center;">Ajouter à la session</a><br>
+                        {% endfor %}
+                    </li><br>
+                </ul><br>
+                </div>
             </div>
-        </div>
+    {% endif %}
+    
     </div>
     {% endblock %}
