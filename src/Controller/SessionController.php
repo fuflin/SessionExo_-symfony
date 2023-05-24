@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Session;
+use App\Entity\Programme;
 use App\Entity\Stagiaire;
 use App\Form\SessionType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -72,11 +73,12 @@ class SessionController extends AbstractController
     // affichage des stagiaires non inscrit à une session
     public function show(EntityManagerInterface $em, Session $session): Response
     {
+        $programmes = $em->getRepository(Programme::class)->findAll();
         $stagiaires = $em->getRepository(Stagiaire::class)->showStagInSession($session); //on utilise la fonction précedement créer dans le repository pour récupérer les stagiaires
         return $this->render('session/detailSession.html.twig', [
            'session' => $session,
            'stagiaires' => $stagiaires,
-           'programme' => $session->getProgrammes()
+           'programmes' => $programmes
         ]);
     }
 
@@ -89,13 +91,13 @@ class SessionController extends AbstractController
         $stagiaire = $em->getRepository(Stagiaire::class)->find($idStagiaire); // on instancie l'entity manager pour récupére l'id du stagiaire
 
         // si on a déjà un stagiaire en session alors
-        if($session->getStagiaires()->contains($stagiaire)){ 
+        if($session->getStagiaires()->contains($stagiaire)){
 
             $session->removeStagiaire($stagiaire); // j'utilise la fonction pour retiré un stagiaire de la session
 
         } else { // sinon
 
-            $session->addStagiaire($stagiaire); // j'ajoute un stagiaire à l'aide de la fonction 
+            $session->addStagiaire($stagiaire); // j'ajoute un stagiaire à l'aide de la fonction
         }
 
         $em->flush(); //on enregistre dans la bdd

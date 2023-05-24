@@ -16,12 +16,10 @@ class ProgrammeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('session', HiddenType::class)
+            // ->add('session', HiddenType::class)
             ->add('module', EntityType::class, [
                 'class' => ModuleSession::class,
-                'choice_label' => function (ModuleSession $module){
-                    return $module->getName();
-                },
+                'choice_label' => 'name',
             ])
             ->add('nb_jours', IntegerType::class, [
                 'label' => 'Durée en jours',

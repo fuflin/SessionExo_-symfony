@@ -28,6 +28,7 @@ class SessionType extends AbstractType
                 'widget' => 'single_text',
                 'attr'=> ['class' => 'form-control']])
             ->add('Nb_place', IntegerType::class, ['attr'=> ['class' => 'form-control']])
+
             // ->add('stagiaires', EntityType::class, [
             //     'class' => Stagiaire::class,
             //     'choice_label' => 'firstname',
@@ -35,6 +36,7 @@ class SessionType extends AbstractType
             //     'expanded' => true,
             //     'attr'=> ['class' => 'form-control']
             // ])
+
             // la collection attends l'élément qu'elle entrera dans le form
             // ce n'est pas obligatoire que ce soit un autre form
             ->add('programmes', CollectionType::class, [
@@ -45,11 +47,12 @@ class SessionType extends AbstractType
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,// obligatoire car Session n'a pas de SetProgramme mais c'est programme qui contient cette Session
-                //Programm est propriétaire de la relation 
+                //Programm est propriétaire de la relation
                 // pour évité un mapping false on est obligé de rajouté un by_reference false
             ])
+
             ->add('submit', SubmitType::class, [
-                'attr' => ['class' => 'btn btn-secondary']])
+                'attr' => ['class' => 'btn btn-primary']])
         ;
     }
 
